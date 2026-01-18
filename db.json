@@ -1,0 +1,32 @@
+{
+  "hotels": [
+    {
+      "id": 1,
+      "name": "Grand Hyatt",
+      "location": "Mumbai",
+      "description": "Luxury stay with sea view.",
+      "rating": 4.5,
+      "amenities": ["WiFi", "Pool", "Spa"],
+      "imageUrl": "https://via.placeholder.com/300",
+      "priceRange": { "min": 5000, "max": 15000 }
+    },
+    {
+      "id": 2,
+      "name": "Cozy Cottage",
+      "location": "Manali",
+      "description": "A warm stay in the mountains.",
+      "rating": 4.8,
+      "amenities": ["Heater", "WiFi", "Bonfire"],
+      "imageUrl": "https://via.placeholder.com/300",
+      "priceRange": { "min": 2000, "max": 5000 }
+    }
+  ],
+  "rooms": [
+    { "id": 101, "hotelId": 1, "roomType": "Double", "price": 5000, "isAvailable": true },
+    { "id": 102, "hotelId": 1, "roomType": "Suite", "price": 12000, "isAvailable": false }
+  ],
+  "users": [
+    { "id": 1, "username": "admin", "email": "admin@test.com", "role": "Admin" }
+  ],
+  "bookings": []
+}
