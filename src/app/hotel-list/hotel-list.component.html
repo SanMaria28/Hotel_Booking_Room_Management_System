@@ -1,1 +1,19 @@
-<p>hotel-list works!</p>
+<div class="hotel-container">
+  <h2>Available Hotels</h2>
+
+  <div class="grid">
+    <div *ngFor="let hotel of hotels" class="hotel-card">
+      <img src="{{hotel.image}}" alt="Photo of {{hotel.name}}">
+      <div class="hotel-details">
+        <h3>{{ hotel.name }}</h3>
+        <p>Location: {{ hotel.location }}</p>
+        <p>Price: ₹{{ hotel.price }} / night</p>
+      </div>
+      <div class="hotel-actions">
+        <button mat-raised-button color="primary" (click)="viewDetails(hotel.id)">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
