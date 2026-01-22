@@ -1,27 +1,68 @@
-# HotelBookingRoomManagement
+# Hotel Booking & Room Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A comprehensive web-based application designed to streamline hotel operations, including room booking, guest management, and administrative tasks. This system provides an intuitive interface for both guests to book their stays and hotel staff to manage the property efficiently.
 
-## Development server
+## 🚀 Deployment
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Access the live website here:** [**Hotel Booking App**](https://hotel-booking-room-management-syste.vercel.app/)
 
-## Code scaffolding
-        
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 📋 Website Details & Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### **For Guests (User)**
+* **Room Browsing:** View available rooms with images, descriptions, and pricing.
+* **Booking History:** View past and upcoming reservations.
 
-## Running unit tests
+### **For Administrators (Staff)**
+* **Dashboard:** Overview of total bookings, revenue, and room occupancy.
+* **Room Management:** Add, update, or remove room listings (photos, prices, amenities)(only display as of now).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🛠️ Tech Stack
 
-## Further help
+* **Frontend:** HTML, CSS, TypeScript, Angular
+* **Version Control:** Git & GitHub
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 👥 Team Members
+
+* [R Jerphin](https://github.com/remijerphin-arch)
+* [San Maria Joby](https://github.com/SanMaria28)
+* [Sonal Joy](https://github.com/SonalJoy10)
+* [Vinayak Vivek]()
+
+---
+
+## ⚙️ Installation & Setup
+
+To run this project locally, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/SanMaria28/Hotel_Booking_Room_Management_System.git](https://github.com/SanMaria28/Hotel_Booking_Room_Management_System.git)
+    ```
+
+2.  **Navigate to the project directory:**
+    ```bash
+    cd Hotel_Booking_Room_Management_System
+    ```
+
+3.  **Install dependencies:**
+    ```bash
+    # Example for Node.js
+    npm install
+    # Example for Python
+    # pip install -r requirements.txt
+    ```
+
+4.  **Run the application:**
+    ```bash
+    # Example for Node.js
+    npm start
+    ```
+
+---
