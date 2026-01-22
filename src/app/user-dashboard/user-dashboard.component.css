@@ -168,21 +168,3 @@
   color: #ff9800;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 20px;
-  }
-
-  .bookings-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .table-container {
-    overflow-x: scroll;
-  }
-
-  .payment-table {
-    min-width: 600px;
-  }
-}

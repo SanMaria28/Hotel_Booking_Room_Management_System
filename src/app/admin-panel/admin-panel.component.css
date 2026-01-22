@@ -192,17 +192,4 @@
   opacity: 0.8;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .admin-container {
-    padding: 20px;
-  }
 
-  .room-form .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-table {
-    min-width: 800px;
-  }
-}
