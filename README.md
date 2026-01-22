@@ -35,7 +35,7 @@ A comprehensive web-based application designed to streamline hotel operations, i
 * [R Jerphin](https://github.com/remijerphin-arch)
 * [San Maria Joby](https://github.com/SanMaria28)
 * [Sonal Joy](https://github.com/SonalJoy10)
-* [Vinayak Vivek]()
+* [Vinayak Vivek](https://github.com/vinayakvivek-tech)
 
 ---
 
