@@ -1,1 +1,115 @@
-<p>admin-panel works!</p>
+<div class="admin-container">
+  <h1>Admin Panel</h1>
+
+  <!-- Add New Room Section -->
+  <section class="add-room-section">
+    <h2>Add New Room</h2>
+    <form class="room-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="hotelName">Hotel Name</label>
+          <input type="text" id="hotelName" placeholder="Enter hotel name" name="hotelName">
+        </div>
+        <div class="form-group">
+          <label for="roomType">Room Type</label>
+          <input type="text" id="roomType" placeholder="Enter room type" name="roomType">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price per Night (₹)</label>
+          <input type="number" id="price" placeholder="Enter price" name="price">
+        </div>
+        <div class="form-group">
+          <label for="capacity">Capacity</label>
+          <input type="number" id="capacity" placeholder="Number of guests" name="capacity">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="available">Availability</label>
+        <select id="available" name="available">
+          <option value="true">Available</option>
+          <option value="false">Not Available</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-add">Add Room</button>
+    </form>
+  </section>
+
+  <!-- Rooms Management Section -->
+  <section class="rooms-section">
+    <h2>Manage Rooms</h2>
+    <div class="table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Room ID</th>
+            <th>Hotel Name</th>
+            <th>Room Type</th>
+            <th>Price</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let room of rooms">
+            <td>#{{ room.id }}</td>
+            <td>{{ room.hotelName }}</td>
+            <td>{{ room.roomType }}</td>
+            <td>₹{{ room.price }}</td>
+            <td>{{ room.capacity }} guests</td>
+            <td>
+              <span class="room-status" [class.available]="room.available" [class.unavailable]="!room.available">
+                {{ room.available ? 'Available' : 'Unavailable' }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-edit">Edit</button>
+                <button class="btn-delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Reservations Tracking Section -->
+  <section class="reservations-section">
+    <h2>Track Reservations</h2>
+    <div class="table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Reservation ID</th>
+            <th>Guest Name</th>
+            <th>Hotel</th>
+            <th>Room Type</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of reservations">
+            <td>#{{ reservation.id }}</td>
+            <td>{{ reservation.guestName }}</td>
+            <td>{{ reservation.hotelName }}</td>
+            <td>{{ reservation.roomType }}</td>
+            <td>{{ reservation.checkIn }}</td>
+            <td>{{ reservation.checkOut }}</td>
+            <td>₹{{ reservation.amount }}</td>
+            <td>
+              <span class="reservation-status" [class.confirmed]="reservation.status === 'Confirmed'" [class.pending]="reservation.status === 'Pending'" [class.completed]="reservation.status === 'Completed'">
+                {{ reservation.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

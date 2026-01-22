@@ -3,14 +3,14 @@
 
   <div class="grid">
     <div *ngFor="let hotel of hotels" class="hotel-card">
-      <img src="{{hotel.image}}" alt="Photo of {{hotel.name}}">
+      <img [src]="hotel.image" [alt]="'Photo of ' + hotel.name" (error)="handleImageError($event)">
       <div class="hotel-details">
         <h3>{{ hotel.name }}</h3>
         <p>Location: {{ hotel.location }}</p>
         <p>Price: ₹{{ hotel.price }} / night</p>
       </div>
       <div class="hotel-actions">
-        <button mat-raised-button color="primary" (click)="viewDetails(hotel.id)">
+        <button class="btn-primary" (click)="viewDetails(hotel.id)">
           View Details
         </button>
       </div>

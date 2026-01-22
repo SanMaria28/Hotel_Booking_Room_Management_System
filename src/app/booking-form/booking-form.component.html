@@ -1,1 +1,78 @@
-<p>booking-form works!</p>
+<div class="booking-container">
+  <h1>Room Reservation</h1>
+
+  <div class="booking-card">
+    <!-- Hotel Details -->
+    <div class="hotel-summary">
+      <h2>{{ hotelName }}</h2>
+      <p class="room-info">{{ roomType }} - ₹{{ roomPrice }} / night</p>
+    </div>
+
+    <!-- Booking Form -->
+    <form class="booking-form">
+      <h3>Guest Information</h3>
+      
+      <div class="form-group">
+        <label for="guestName">Full Name</label>
+        <input type="text" id="guestName" placeholder="Enter your full name" [(ngModel)]="guestName" name="guestName">
+      </div>
+
+      <div class="form-group">
+        <label for="guestEmail">Email</label>
+        <input type="email" id="guestEmail" placeholder="Enter your email" [(ngModel)]="guestEmail" name="guestEmail">
+      </div>
+
+      <div class="form-group">
+        <label for="guestPhone">Phone Number</label>
+        <input type="tel" id="guestPhone" placeholder="Enter your phone number" [(ngModel)]="guestPhone" name="guestPhone">
+      </div>
+
+      <h3>Booking Details</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="checkIn">Check-in Date</label>
+          <input type="date" id="checkIn" [(ngModel)]="checkInDate" name="checkInDate">
+        </div>
+
+        <div class="form-group">
+          <label for="checkOut">Check-out Date</label>
+          <input type="date" id="checkOut" [(ngModel)]="checkOutDate" name="checkOutDate">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="guests">Number of Guests</label>
+        <select id="guests" name="guests">
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="requests">Special Requests (Optional)</label>
+        <textarea id="requests" rows="4" placeholder="Any special requirements..." name="requests"></textarea>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="price-summary">
+        <div class="summary-row">
+          <span>Room Price (per night):</span>
+          <span>₹{{ roomPrice }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Number of Nights:</span>
+          <span>1</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total Amount:</span>
+          <span>₹{{ roomPrice }}</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>

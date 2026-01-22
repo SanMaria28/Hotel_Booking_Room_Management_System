@@ -1,1 +1,58 @@
-<p>user-dashboard works!</p>
+<div class="dashboard-container">
+  <h1>Welcome, {{ userName }}!</h1>
+
+  <!-- My Bookings Section -->
+  <section class="bookings-section">
+    <h2>My Bookings</h2>
+    <div class="bookings-grid">
+      <div *ngFor="let booking of bookings" class="booking-card" [class.confirmed]="booking.status === 'Confirmed'" [class.pending]="booking.status === 'Pending'" [class.completed]="booking.status === 'Completed'">
+        <div class="booking-header">
+          <h3>{{ booking.hotelName }}</h3>
+          <span class="status-badge" [class.status-confirmed]="booking.status === 'Confirmed'" [class.status-pending]="booking.status === 'Pending'" [class.status-completed]="booking.status === 'Completed'">
+            {{ booking.status }}
+          </span>
+        </div>
+        <div class="booking-details">
+          <p><strong>Room:</strong> {{ booking.roomType }}</p>
+          <p><strong>Check-in:</strong> {{ booking.checkIn }}</p>
+          <p><strong>Check-out:</strong> {{ booking.checkOut }}</p>
+          <p><strong>Guests:</strong> {{ booking.guests }}</p>
+          <p class="amount"><strong>Total:</strong> ₹{{ booking.totalAmount }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment History Section -->
+  <section class="payments-section">
+    <h2>Payment History</h2>
+    <div class="table-container">
+      <table class="payment-table">
+        <thead>
+          <tr>
+            <th>Payment ID</th>
+            <th>Booking ID</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of payments">
+            <td>#{{ payment.id }}</td>
+            <td>#{{ payment.bookingId }}</td>
+            <td>₹{{ payment.amount }}</td>
+            <td>{{ payment.date }}</td>
+            <td>{{ payment.method }}</td>
+            <td>
+              <span class="payment-status" [class.paid]="payment.status === 'Paid'" [class.pending]="payment.status === 'Pending'">
+                {{ payment.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

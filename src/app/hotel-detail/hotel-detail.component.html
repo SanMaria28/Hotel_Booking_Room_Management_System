@@ -1,1 +1,55 @@
-<p>hotel-detail works!</p>
+<div class="detail-container" *ngIf="hotel">
+  <!-- Hotel Header Section -->
+  <div class="hotel-header">
+    <img [src]="hotel.image" [alt]="hotel.name" (error)="handleImageError($event)" class="hotel-image">
+    <div class="hotel-info">
+      <h1>{{ hotel.name }}</h1>
+      <div class="location">
+        <span class="icon">📍</span>
+        <span>{{ hotel.location }}</span>
+      </div>
+      <div class="rating">
+        <span class="star">⭐</span>
+        <span>{{ hotel.rating }} / 5.0</span>
+      </div>
+      <p class="description">{{ hotel.description }}</p>
+      <div class="starting-price">
+        Starting from <strong>₹{{ hotel.price }}</strong> / night
+      </div>
+    </div>
+  </div>
+
+  <!-- Rooms Section -->
+  <div class="rooms-section">
+    <h2>Available Rooms</h2>
+    <div class="rooms-grid">
+      <div *ngFor="let room of hotel.rooms" class="room-card" [class.unavailable]="!room.available">
+        <div class="room-header">
+          <h3>{{ room.type }}</h3>
+          <div class="room-price">₹{{ room.price }}<span>/night</span></div>
+        </div>
+        
+        <div class="room-amenities">
+          <h4>Amenities:</h4>
+          <ul>
+            <li *ngFor="let amenity of room.amenities">
+              <span class="check-icon">✓</span>
+              {{ amenity }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="availability-status">
+          <span *ngIf="room.available" class="available">Available</span>
+          <span *ngIf="!room.available" class="not-available">Not Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!hotel">
+  <span class="hotel-icon">🏨</span>
+  <h2>Hotel Not Found</h2>
+  <p>The hotel you're looking for doesn't exist.</p>
+</div>
