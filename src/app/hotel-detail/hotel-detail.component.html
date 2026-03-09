@@ -1,0 +1,77 @@
+<section class="detail-shell" *ngIf="hotel as currentHotel">
+  <div class="detail-hero">
+    <img [src]="currentHotel.imageUrl" [alt]="currentHotel.name" (error)="handleImageError($event)" />
+
+    <div class="detail-copy">
+      <p class="eyebrow">{{ currentHotel.location }}</p>
+      <h1>{{ currentHotel.name }}</h1>
+      <p>{{ currentHotel.description }}</p>
+
+      <div class="hero-badges">
+        <span><mat-icon>star</mat-icon>{{ currentHotel.rating }} rating</span>
+        <span><mat-icon>spa</mat-icon>{{ currentHotel.amenities[0] }}</span>
+        <span><mat-icon>payments</mat-icon>{{ currentHotel.priceRange.min | currency:'INR':'symbol' }} onward</span>
+      </div>
+
+      <div class="hero-actions">
+        <button mat-flat-button color="primary" [routerLink]="['/book', currentHotel.id]">Reserve Room</button>
+        <button mat-stroked-button routerLink="/hotels">Back to Hotels</button>
+      </div>
+    </div>
+  </div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="category-nav">
+    <a
+      mat-tab-link
+      *ngFor="let link of categoryLinks"
+      [routerLink]="link.path ? ['/hotel', currentHotel.id, link.path] : ['/hotel', currentHotel.id]"
+      [active]="(category === 'all' && link.path === '') || category === link.path"
+    >
+      {{ link.label }}
+    </a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+  <section class="room-grid">
+    <mat-card
+      *ngFor="let room of filteredRooms"
+      class="room-card"
+      [appHighlightFullyBooked]="!room.isAvailable"
+      [appHighlightDiscount]="room.discounted"
+    >
+      <img mat-card-image [src]="room.imageUrl" [alt]="room.roomType" />
+
+      <mat-card-content>
+        <div class="room-meta">
+          <div>
+            <h2>{{ room.roomType }}</h2>
+            <p>{{ room.category | titlecase }} room for {{ room.capacity }} guest(s)</p>
+          </div>
+          <div class="room-price">
+            {{ room.price | currency:'INR':'symbol' }}
+            <small>/ night</small>
+          </div>
+        </div>
+
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Room details</mat-panel-title>
+              <mat-panel-description>{{ room.isAvailable ? 'Available' : 'Fully booked' }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="amenity-stack">
+              <span *ngFor="let amenity of room.amenities">{{ amenity }}</span>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="status-row">
+          <span class="status-pill" [class.status-alert]="!room.isAvailable">
+            {{ room.isAvailable ? 'Available now' : 'Fully booked' }}
+          </span>
+          <span class="status-pill status-success" *ngIf="room.discounted">Discounted</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</section>

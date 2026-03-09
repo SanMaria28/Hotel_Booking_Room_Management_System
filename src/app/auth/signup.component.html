@@ -1,0 +1,58 @@
+<section class="auth-page">
+  <div class="auth-panel intro-panel">
+    <p class="eyebrow">Guest onboarding</p>
+    <h1>Create an account to book faster, track stays, and manage upcoming reservations.</h1>
+    <p class="support-copy">
+      This setup uses JSON Server for demo authentication, so accounts are stored locally for development.
+    </p>
+  </div>
+
+  <div class="auth-panel form-panel">
+    <h2>Create account</h2>
+
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" novalidate>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Full name</mat-label>
+        <input matInput name="fullName" ngModel required />
+        <mat-error *ngIf="signupForm.submitted && signupForm.controls['fullName'].invalid">
+          Full name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput name="username" ngModel required />
+        <mat-error *ngIf="signupForm.submitted && signupForm.controls['username'].invalid">
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput name="email" ngModel required email />
+        <mat-error *ngIf="signupForm.submitted && signupForm.controls['email'].invalid">
+          Enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput name="password" ngModel type="password" required minlength="6" />
+        <mat-error *ngIf="signupForm.submitted && signupForm.controls['password'].invalid">
+          Password must be at least 6 characters.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="cta-button" [disabled]="loading">
+        <span *ngIf="!loading">Sign Up</span>
+        <span *ngIf="loading" class="inline-loader">
+          <mat-progress-spinner diameter="18" mode="indeterminate"></mat-progress-spinner>
+          Creating account
+        </span>
+      </button>
+    </form>
+
+    <p class="error-msg" *ngIf="error">{{ error }}</p>
+    <p class="switch-copy">Already registered? <a routerLink="/login">Login</a></p>
+  </div>
+</section>

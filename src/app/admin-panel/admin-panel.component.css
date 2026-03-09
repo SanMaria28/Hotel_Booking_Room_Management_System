@@ -1,0 +1,78 @@
+.admin-shell {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.admin-hero,
+.panel {
+  padding: 1.5rem;
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.admin-hero,
+.admin-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-grid {
+  grid-template-columns: 380px 1fr;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 0.8rem;
+}
+
+.hero-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #0f172a, #0f766e);
+  color: #f8fafc;
+}
+
+.hero-card strong {
+  display: block;
+  font-size: 1.8rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.inline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.submit-room {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 999px;
+}
+
+.panel {
+  overflow-x: auto;
+}
+
+@media (max-width: 960px) {
+  .admin-grid,
+  .hero-grid,
+  .inline-grid {
+    grid-template-columns: 1fr;
+  }
+}

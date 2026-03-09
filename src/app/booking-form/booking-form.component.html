@@ -1,0 +1,70 @@
+<section class="booking-shell" *ngIf="bookingForm">
+  <div class="booking-summary">
+    <p class="eyebrow">Reservation desk</p>
+    <h1>Confirm your stay at {{ hotelName }}</h1>
+    <p>Choose room, dates, and guest count with inline validation before confirming your booking.</p>
+
+    <div class="summary-card" *ngIf="selectedRoom as room">
+      <img [src]="room.imageUrl" [alt]="room.roomType" />
+      <div>
+        <h2>{{ room.roomType }}</h2>
+        <p>{{ room.category | titlecase }} room for {{ room.capacity }} guest(s)</p>
+        <strong>{{ room.price | currency:'INR':'symbol' }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="bookingForm" (ngSubmit)="submit()" class="booking-panel">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Check-in date</mat-label>
+      <input matInput formControlName="checkIn" type="date" />
+      <mat-error *ngIf="bookingForm.controls['checkIn'].invalid && bookingForm.controls['checkIn'].touched">
+        Check-in date is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Check-out date</mat-label>
+      <input matInput formControlName="checkOut" type="date" />
+      <mat-error *ngIf="bookingForm.controls['checkOut'].invalid && bookingForm.controls['checkOut'].touched">
+        Check-out date is required.
+      </mat-error>
+      <mat-error *ngIf="bookingForm.errors?.['dateRange']">Check-out must be later than check-in.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Guests</mat-label>
+      <input matInput formControlName="guests" type="number" min="1" />
+      <mat-error *ngIf="bookingForm.controls['guests'].invalid && bookingForm.controls['guests'].touched">
+        Enter at least 1 guest.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select room</mat-label>
+      <mat-select formControlName="roomId">
+        <mat-option *ngFor="let room of rooms" [value]="room.id">
+          {{ room.roomType }} - {{ room.price | currency:'INR':'symbol' }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="bookingForm.controls['roomId'].invalid && bookingForm.controls['roomId'].touched">
+        Choose a room to continue.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="bill-card">
+      <div>
+        <span>Nightly rate</span>
+        <strong>{{ hotelPrice | currency:'INR':'symbol' }}</strong>
+      </div>
+      <div>
+        <span>Estimated total</span>
+        <strong>{{ totalAmount | currency:'INR':'symbol' }}</strong>
+      </div>
+    </div>
+
+    <button mat-flat-button color="primary" class="submit-button" [disabled]="bookingForm.invalid">
+      Proceed to Confirmation
+    </button>
+  </form>
+</section>

@@ -1,0 +1,89 @@
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Curated stays</p>
+    <h1>Book standout hotels with polished rooms, premium amenities, and clear pricing.</h1>
+    <p>
+      Explore city stays, mountain retreats, and premium suites with a cleaner search experience for guests and staff.
+    </p>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <strong>{{ hotels.length }}</strong>
+      <span>Active properties</span>
+    </div>
+    <div class="stat-card">
+      <strong>24/7</strong>
+      <span>Guest support</span>
+    </div>
+    <div class="stat-card">
+      <strong>4.7+</strong>
+      <span>Average guest rating</span>
+    </div>
+  </div>
+</section>
+
+<section class="filter-panel">
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput [(ngModel)]="filterLocation" (ngModelChange)="loadHotels()" placeholder="Mumbai, Manali, Bengaluru" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Min price</mat-label>
+    <input matInput type="number" [(ngModel)]="minPrice" (ngModelChange)="loadHotels()" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Max price</mat-label>
+    <input matInput type="number" [(ngModel)]="maxPrice" (ngModelChange)="loadHotels()" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Minimum rating</mat-label>
+    <mat-select [(ngModel)]="minRating" (selectionChange)="loadHotels()">
+      <mat-option [value]="undefined">Any rating</mat-option>
+      <mat-option [value]="4">4.0+</mat-option>
+      <mat-option [value]="4.5">4.5+</mat-option>
+      <mat-option [value]="4.7">4.7+</mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>
+
+<section class="hotel-grid">
+  <mat-card
+    *ngFor="let hotel of hotels | locationFilter:filterLocation | priceFilter:minPrice:maxPrice | ratingFilter:minRating"
+    class="hotel-card"
+  >
+    <img mat-card-image [src]="hotel.imageUrl" [alt]="hotel.name" (error)="handleImageError($event)" />
+
+    <mat-card-content>
+      <div class="card-topline">
+        <span>{{ hotel.location }}</span>
+        <span class="rating-pill">
+          <mat-icon>star</mat-icon>
+          {{ hotel.rating }}
+        </span>
+      </div>
+
+      <h2>{{ hotel.name }}</h2>
+      <p>{{ hotel.description }}</p>
+
+      <div class="amenity-list">
+        <span *ngFor="let amenity of hotel.amenities | slice:0:3">{{ amenity }}</span>
+      </div>
+
+      <div class="price-strip">
+        <div>
+          <small>Starting from</small>
+          <strong>{{ hotel.priceRange.min | currency:'INR':'symbol' }}</strong>
+        </div>
+        <span>up to {{ hotel.priceRange.max | currency:'INR':'symbol' }}</span>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="viewDetails(hotel.id)">View Details</button>
+    </mat-card-actions>
+  </mat-card>
+</section>

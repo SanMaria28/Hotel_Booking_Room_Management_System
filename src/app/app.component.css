@@ -1,0 +1,48 @@
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+}
+
+.top-loader {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.background-orb {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-a {
+  width: 18rem;
+  height: 18rem;
+  background: rgba(20, 184, 166, 0.35);
+  top: 6rem;
+  left: -4rem;
+}
+
+.orb-b {
+  width: 22rem;
+  height: 22rem;
+  background: rgba(245, 158, 11, 0.22);
+  right: -8rem;
+  top: 12rem;
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    padding: 1rem;
+  }
+}

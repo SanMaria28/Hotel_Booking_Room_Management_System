@@ -1,0 +1,26 @@
+<mat-toolbar class="app-toolbar">
+  <div class="brand" routerLink="/hotels">
+    <span class="brand-mark">HB</span>
+    <div class="brand-copy">
+      <strong>Harbor Booking</strong>
+      <span>Luxury stays and room management</span>
+    </div>
+  </div>
+
+  <nav class="nav-links">
+    <a mat-button routerLink="/hotels" routerLinkActive="active-link">Hotels</a>
+    <a mat-button routerLink="/dashboard" routerLinkActive="active-link" *ngIf="userService.isLoggedIn()">Dashboard</a>
+    <a mat-button routerLink="/admin" routerLinkActive="active-link" *ngIf="userService.isAdmin()">Admin</a>
+  </nav>
+
+  <div class="toolbar-actions">
+    <div class="session-chip" *ngIf="userService.currentUser as user">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ user.fullName }}</span>
+    </div>
+
+    <a mat-stroked-button routerLink="/login" *ngIf="!userService.isLoggedIn()">Login</a>
+    <a mat-flat-button color="primary" routerLink="/signup" *ngIf="!userService.isLoggedIn()">Sign Up</a>
+    <button mat-flat-button color="accent" (click)="logout()" *ngIf="userService.isLoggedIn()">Logout</button>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,259 @@
+{
+  "hotels": [
+    {
+      "id": "1",
+      "name": "Azure Crest Palace",
+      "location": "Mumbai",
+      "description": "A polished coastal retreat with skyline-facing suites, spa rituals, rooftop dining, and concierge-led business travel services.",
+      "rating": 4.8,
+      "amenities": [
+        "Infinity Pool",
+        "Airport Transfer",
+        "Spa",
+        "Workspace",
+        "Sea View"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "priceRange": {
+        "min": 6500,
+        "max": 18000
+      }
+    },
+    {
+      "id": "2",
+      "name": "Cedar Haven Resort",
+      "location": "Manali",
+      "description": "An alpine stay built for slow weekends, mountain views, fireplace evenings, and family-friendly leisure amenities.",
+      "rating": 4.6,
+      "amenities": [
+        "Bonfire Deck",
+        "Mountain View",
+        "Breakfast Included",
+        "Kids Lounge",
+        "Free WiFi"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "priceRange": {
+        "min": 3200,
+        "max": 9200
+      }
+    },
+    {
+      "id": "3",
+      "name": "Verdant Urban Stay",
+      "location": "Bengaluru",
+      "description": "A contemporary city hotel designed for hybrid work, long stays, and premium business comfort near tech corridors.",
+      "rating": 4.7,
+      "amenities": [
+        "Co-working Hub",
+        "Gym",
+        "EV Charging",
+        "Meeting Rooms",
+        "Smart Check-in"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+      "priceRange": {
+        "min": 4800,
+        "max": 14000
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "id": "101",
+      "hotelId": 1,
+      "roomType": "Harbor Standard",
+      "category": "standard",
+      "price": 6500,
+      "capacity": 2,
+      "isAvailable": true,
+      "discounted": false,
+      "amenities": [
+        "Queen Bed",
+        "Rain Shower",
+        "Smart TV"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1631049035182-249067d7618e?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "102",
+      "hotelId": 1,
+      "roomType": "Skyline Deluxe",
+      "category": "deluxe",
+      "price": 9800,
+      "capacity": 3,
+      "isAvailable": true,
+      "discounted": true,
+      "amenities": [
+        "Balcony",
+        "Mini Bar",
+        "City View"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "103",
+      "hotelId": 1,
+      "roomType": "Presidential Suite",
+      "category": "suite",
+      "price": 18000,
+      "capacity": 4,
+      "isAvailable": false,
+      "discounted": false,
+      "amenities": [
+        "Lounge Area",
+        "Sea View",
+        "Butler Service"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "201",
+      "hotelId": 2,
+      "roomType": "Pine Standard",
+      "category": "standard",
+      "price": 3200,
+      "capacity": 2,
+      "isAvailable": true,
+      "discounted": true,
+      "amenities": [
+        "Heater",
+        "Tea Station",
+        "Valley View"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "202",
+      "hotelId": 2,
+      "roomType": "Summit Deluxe",
+      "category": "deluxe",
+      "price": 5700,
+      "capacity": 3,
+      "isAvailable": true,
+      "discounted": false,
+      "amenities": [
+        "Private Deck",
+        "Fireplace",
+        "Breakfast"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "203",
+      "hotelId": 2,
+      "roomType": "Alpine Suite",
+      "category": "suite",
+      "price": 9200,
+      "capacity": 4,
+      "isAvailable": true,
+      "discounted": false,
+      "amenities": [
+        "Panoramic Windows",
+        "Bathtub",
+        "Living Area"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "301",
+      "hotelId": 3,
+      "roomType": "Studio Standard",
+      "category": "standard",
+      "price": 4800,
+      "capacity": 2,
+      "isAvailable": true,
+      "discounted": false,
+      "amenities": [
+        "Work Desk",
+        "Fast WiFi",
+        "Smart Lighting"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "302",
+      "hotelId": 3,
+      "roomType": "Executive Deluxe",
+      "category": "deluxe",
+      "price": 8700,
+      "capacity": 3,
+      "isAvailable": false,
+      "discounted": true,
+      "amenities": [
+        "Lounge Access",
+        "Coffee Bar",
+        "Dual Workspace"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "303",
+      "hotelId": 3,
+      "roomType": "Urban Suite",
+      "category": "suite",
+      "price": 14000,
+      "capacity": 4,
+      "isAvailable": true,
+      "discounted": false,
+      "amenities": [
+        "Dining Corner",
+        "Meeting Nook",
+        "Premium View"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "fullName": "Admin Desk",
+      "username": "admin",
+      "email": "admin@test.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "fullName": "Maya Joseph",
+      "username": "maya",
+      "email": "maya@test.com",
+      "password": "guest123",
+      "role": "guest"
+    },
+    {
+      "id": "ef04",
+      "fullName": "R",
+      "username": "Jerphin",
+      "email": "remijerphin@gmail.com",
+      "password": "jerphin@66",
+      "role": "guest"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "userId": 2,
+      "hotelId": 1,
+      "roomId": 102,
+      "guests": 2,
+      "checkIn": "2026-03-15",
+      "checkOut": "2026-03-18",
+      "totalAmount": 29400,
+      "status": "confirmed",
+      "createdAt": "2026-03-01T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "hotelId": 2,
+      "roomId": 201,
+      "guests": 2,
+      "checkIn": "2026-04-01",
+      "checkOut": "2026-04-04",
+      "totalAmount": 9600,
+      "status": "pending",
+      "createdAt": "2026-03-05T08:30:00.000Z"
+    }
+  ]
+}

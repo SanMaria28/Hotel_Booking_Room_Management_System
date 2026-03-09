@@ -1,0 +1,165 @@
+<section class="admin-shell">
+  <div class="admin-hero">
+    <div>
+      <p class="eyebrow">Operations overview</p>
+      <h1>Admin control center for rooms, bookings, and live occupancy.</h1>
+      <p>Monitor guest demand, add new inventory, and review reservation performance without leaving the dashboard.</p>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-card">
+        <strong>{{ bookings.length }}</strong>
+        <span>Bookings</span>
+      </div>
+      <div class="hero-card">
+        <strong>{{ rooms.length }}</strong>
+        <span>Rooms</span>
+      </div>
+      <div class="hero-card">
+        <strong>{{ occupancyRows.length }}</strong>
+        <span>Hotels tracked</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="admin-grid">
+    <form [formGroup]="roomForm" (ngSubmit)="submitRoom()" class="panel form-panel">
+      <h2>Room management</h2>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Hotel</mat-label>
+        <mat-select formControlName="hotelId">
+          <mat-option *ngFor="let hotel of hotels" [value]="hotel.id">{{ hotel.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Room type</mat-label>
+        <input matInput formControlName="roomType" />
+      </mat-form-field>
+
+      <div class="inline-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option value="standard">Standard</mat-option>
+            <mat-option value="deluxe">Deluxe</mat-option>
+            <mat-option value="suite">Suite</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Capacity</mat-label>
+          <input matInput type="number" formControlName="capacity" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+
+      <div class="toggle-row">
+        <mat-checkbox formControlName="discounted">Discounted room</mat-checkbox>
+        <mat-checkbox formControlName="isAvailable">Available now</mat-checkbox>
+      </div>
+
+      <button mat-flat-button color="primary" class="submit-room">Save Room</button>
+    </form>
+
+    <div class="panel">
+      <h2>Bookings</h2>
+      <mat-table [dataSource]="bookings">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.id }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hotel">
+          <mat-header-cell *matHeaderCellDef>Hotel</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ hotelName(booking.hotelId) }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="checkIn">
+          <mat-header-cell *matHeaderCellDef>Check-In</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.checkIn | date }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="checkOut">
+          <mat-header-cell *matHeaderCellDef>Check-Out</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.checkOut | date }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="guests">
+          <mat-header-cell *matHeaderCellDef>Guests</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.guests }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.totalAmount | currency:'INR':'symbol' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let booking">{{ booking.status }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="bookingColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: bookingColumns"></mat-row>
+      </mat-table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Rooms</h2>
+    <mat-table [dataSource]="rooms">
+      <ng-container matColumnDef="roomType">
+        <mat-header-cell *matHeaderCellDef>Room</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ room.roomType }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="hotel">
+        <mat-header-cell *matHeaderCellDef>Hotel</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ hotelName(room.hotelId) }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ room.category }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="capacity">
+        <mat-header-cell *matHeaderCellDef>Capacity</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ room.capacity }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ room.price | currency:'INR':'symbol' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="availability">
+        <mat-header-cell *matHeaderCellDef>Availability</mat-header-cell>
+        <mat-cell *matCellDef="let room">{{ room.isAvailable ? 'Available' : 'Occupied' }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="roomColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: roomColumns"></mat-row>
+    </mat-table>
+  </section>
+
+  <section class="panel">
+    <h2>Occupancy monitor</h2>
+    <mat-table [dataSource]="occupancyRows">
+      <ng-container matColumnDef="hotelName">
+        <mat-header-cell *matHeaderCellDef>Hotel</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.hotelName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalRooms">
+        <mat-header-cell *matHeaderCellDef>Total rooms</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.totalRooms }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="occupiedRooms">
+        <mat-header-cell *matHeaderCellDef>Occupied</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.occupiedRooms }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="availableRooms">
+        <mat-header-cell *matHeaderCellDef>Available</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.availableRooms }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="occupancyColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: occupancyColumns"></mat-row>
+    </mat-table>
+  </section>
+</section>

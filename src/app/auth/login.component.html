@@ -1,0 +1,43 @@
+<section class="auth-page">
+  <div class="auth-panel intro-panel">
+    <p class="eyebrow">Premium hospitality platform</p>
+    <h1>Sign in to manage bookings, guests, and curated room inventory.</h1>
+    <p class="support-copy">
+      Use the demo accounts below:
+      <strong>admin / admin123</strong> or <strong>maya / guest123</strong>.
+    </p>
+  </div>
+
+  <div class="auth-panel form-panel">
+    <h2>Welcome back</h2>
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput name="username" ngModel required />
+        <mat-error *ngIf="loginForm.submitted && loginForm.controls['username'].invalid">
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput name="password" ngModel type="password" required />
+        <mat-error *ngIf="loginForm.submitted && loginForm.controls['password'].invalid">
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="cta-button" [disabled]="loading">
+        <span *ngIf="!loading">Login</span>
+        <span *ngIf="loading" class="inline-loader">
+          <mat-progress-spinner diameter="18" mode="indeterminate"></mat-progress-spinner>
+          Signing in
+        </span>
+      </button>
+    </form>
+
+    <p class="error-msg" *ngIf="error">{{ error }}</p>
+    <p class="switch-copy">Need an account? <a routerLink="/signup">Create one</a></p>
+  </div>
+</section>

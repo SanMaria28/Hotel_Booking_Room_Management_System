@@ -1,0 +1,75 @@
+<section class="dashboard-shell">
+  <div class="dashboard-header">
+    <div>
+      <p class="eyebrow">Guest dashboard</p>
+      <h1>Welcome back, {{ userName }}</h1>
+      <p>Track your upcoming stays, booking history, and reservation values in one place.</p>
+    </div>
+
+    <div class="summary-cards">
+      <div class="summary-card">
+        <strong>{{ bookings.length }}</strong>
+        <span>Total bookings</span>
+      </div>
+      <div class="summary-card">
+        <strong>{{ bookings[0]?.status || 'None' }}</strong>
+        <span>Latest status</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-shell">
+    <mat-table [dataSource]="bookings">
+      <ng-container matColumnDef="hotelName">
+        <mat-header-cell *matHeaderCellDef>Hotel</mat-header-cell>
+        <mat-cell *matCellDef="let booking">{{ booking.hotelName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checkIn">
+        <mat-header-cell *matHeaderCellDef>Check-In</mat-header-cell>
+        <mat-cell *matCellDef="let booking">{{ booking.checkIn | date }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checkOut">
+        <mat-header-cell *matHeaderCellDef>Check-Out</mat-header-cell>
+        <mat-cell *matCellDef="let booking">{{ booking.checkOut | date }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="guests">
+        <mat-header-cell *matHeaderCellDef>Guests</mat-header-cell>
+        <mat-cell *matCellDef="let booking">{{ booking.guests }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let booking">{{ booking.totalAmount | currency:'INR':'symbol' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let booking">
+          <span class="status-pill" [class.status-pending]="booking.status === 'pending'">
+            {{ booking.status }}
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let booking">
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="cancel(booking.id)"
+            [disabled]="booking.status === 'cancelled'"
+          >
+            Cancel
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</section>

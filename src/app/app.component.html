@@ -1,0 +1,12 @@
+<div class="app-shell">
+  <div class="background-orb orb-a"></div>
+  <div class="background-orb orb-b"></div>
+
+  <app-navbar></app-navbar>
+
+  <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate" class="top-loader"></mat-progress-bar>
+
+  <main class="page-shell">
+    <router-outlet></router-outlet>
+  </main>
+</div>
