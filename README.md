@@ -1,20 +1,18 @@
 # Hotel Booking Room Management System
 
-A polished Angular hotel booking platform with guest booking flows, admin room management, occupancy tracking, authentication, route guards, Angular Material UI, and a JSON Server mock API.
+An Angular hotel booking platform with separate guest and admin login flows, luxury hotel listings, dark mode, booking management, and a JSON Server mock API.
 
 ## Overview
 
 This project includes:
 
-- hotel discovery with search and filters
-- dynamic hotel detail pages with room-category child routes
-- booking flow with reactive forms and confirmation dialog
-- guest dashboard for booking history and cancellations
-- admin dashboard for bookings, rooms, and occupancy monitoring
-- template-driven login and signup
-- route guards for guest and admin access
-- custom pipes and directives
-- HTTP interceptor with logging, loading state, and API error handling
+- separate `guest` and `admin` login pages
+- guest hotel browsing, booking, and booking-history management
+- admin-only access to hotel, room, booking, and customer management
+- dark mode toggle with persisted theme
+- luxury India hotel catalog with seeded rooms and bookings
+- route guards for guest-only and admin-only pages
+- Angular Material UI, reactive forms, pipes, directives, and interceptors
 
 ## Tech Stack
 
@@ -31,20 +29,17 @@ This project includes:
 - `/hotel/:id/standard` - standard rooms
 - `/hotel/:id/deluxe` - deluxe rooms
 - `/hotel/:id/suite` - suites
-- `/book/:id` - booking form
-- `/dashboard` - user dashboard
+- `/book/:id` - guest booking form
+- `/dashboard` - guest dashboard
 - `/admin` - admin panel
-- `/login` - login
-- `/signup` - signup
+- `/guest-login` - guest login
+- `/admin-login` - admin login
+- `/signup` - guest signup
 
 ## Demo Credentials
 
-- Admin
-  - username: `admin`
-  - password: `admin123`
-- Guest
-  - username: `maya`
-  - password: `guest123`
+- Admin: `admin / admin123`
+- Guest: `maya / guest123`
 
 ## Local Setup
 
@@ -79,9 +74,12 @@ Open:
 http://localhost:4200
 ```
 
-## One-Command Start
+Then use:
 
-This project also includes:
+- `http://localhost:4200/guest-login` for guest access
+- `http://localhost:4200/admin-login` for admin access
+
+## One-Command Start
 
 ```bash
 npm run start:all
@@ -111,28 +109,45 @@ Available endpoints:
 - `GET /hotels`
 - `GET /hotels/:id`
 - `GET /rooms`
+- `PATCH /rooms/:id`
 - `GET /bookings`
 - `POST /bookings`
 - `DELETE /bookings/:id`
 - `GET /users`
 - `POST /users`
+- `POST /hotels`
 
 ## Feature Highlights
 
 ### Guest Experience
 
+- sign up and log in separately from admin
 - search hotels by location, price, and rating
 - browse room categories using nested routes
+- reserve available rooms from the guest flow only
 - see pricing with Angular pipes
 - book rooms with validation and confirmation dialog
-- cancel bookings from the dashboard
+- cancel bookings from the dashboard and release room availability
+- switch between light and dark mode
 
 ### Admin Experience
 
+- log in through a dedicated admin-only page
+- add new hotels with name, image, pricing, and amenities
 - manage room inventory with a reactive form
-- view booking records in Material tables
+- view booking records with customer details and booked room information
 - monitor occupancy across hotels
-- review room availability and pricing in one panel
+- review guest directory, room availability, revenue, and pricing in one panel
+
+## Seeded Hotel Catalog
+
+The demo data includes these luxury properties:
+
+- Raffles Udaipur
+- ITC Grand Chola
+- Rambagh Palace
+- ITC Grand Chola Towers
+- Taj Mahal Palace
 
 ### Angular Features Used
 
@@ -168,6 +183,7 @@ src/
 
 ## Notes
 
+- If you change [db.json](./db.json), restart JSON Server so the new seed data is loaded.
 - If Angular cache errors happen inside OneDrive, delete the `.angular` folder and restart the dev server.
 - If port `4200` or `3000` is already in use, stop the old process first.
 
