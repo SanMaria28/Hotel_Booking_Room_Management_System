@@ -8,9 +8,11 @@ export class UserGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
   canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.userService.isLoggedIn()) {
+    if (this.userService.isGuest()) {
       return true;
     }
-    return this.router.createUrlTree(['/login']);
+    return this.userService.isAdmin()
+      ? this.router.createUrlTree(['/admin'])
+      : this.router.createUrlTree(['/guest-login']);
   }
 }

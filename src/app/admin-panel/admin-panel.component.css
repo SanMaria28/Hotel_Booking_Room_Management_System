@@ -2,44 +2,95 @@
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .admin-hero,
 .panel {
-  padding: 1.5rem;
-  border-radius: 1.6rem;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  padding: 1.6rem;
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
 }
 
 .admin-hero,
 .admin-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .admin-grid {
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.management-stack {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.5rem;
+}
+
+.hero-copy {
+  max-width: 760px;
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(120px, 1fr));
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .hero-card {
-  padding: 1rem;
-  border-radius: 1rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1.2rem;
   background: linear-gradient(135deg, #0f172a, #0f766e);
   color: #f8fafc;
 }
 
+.hero-card span,
+.hero-card small {
+  display: block;
+}
+
 .hero-card strong {
   display: block;
+  margin: 0.2rem 0 0.3rem;
   font-size: 1.8rem;
+}
+
+.hero-card small {
+  color: rgba(248, 250, 252, 0.76);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panel-kicker {
+  margin: 0 0 0.25rem;
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-heading h2 {
+  margin: 0;
+}
+
+.panel-copy {
+  margin: 0.5rem 0 1.25rem;
+  color: #475569;
 }
 
 .full-width {
@@ -65,14 +116,153 @@
   border-radius: 999px;
 }
 
-.panel {
+.table-shell {
   overflow-x: auto;
+}
+
+.stacked-cell {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.75rem 0;
+}
+
+.stacked-cell span {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.cell-tag {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #0f766e;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.guest-list,
+.occupancy-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.guest-card,
+.occupancy-card {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.guest-card-top,
+.occupancy-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.guest-card h3,
+.occupancy-card h3 {
+  margin: 0;
+}
+
+.guest-card p,
+.occupancy-card p {
+  margin: 0.2rem 0 0;
+  color: #64748b;
+}
+
+.guest-email {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.guest-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.guest-metrics span,
+.occupancy-meta span {
+  display: inline-flex;
+  padding: 0.32rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.14);
+  color: #475569;
+  font-size: 0.82rem;
+}
+
+.occupancy-meta {
+  display: grid;
+  justify-items: end;
+  gap: 0.4rem;
+}
+
+.occupancy-meta strong {
+  font-size: 1.3rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.12);
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+}
+
+.status-cancelled {
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+}
+
+.status-available {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0369a1;
+}
+
+.compact-table {
+  margin-bottom: 1rem;
+}
+
+mat-header-cell {
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+mat-cell {
+  color: #0f172a;
 }
 
 @media (max-width: 960px) {
   .admin-grid,
+  .insight-grid,
   .hero-grid,
   .inline-grid {
     grid-template-columns: 1fr;
+  }
+
+  .guest-card-top,
+  .occupancy-card {
+    grid-template-columns: 1fr;
+  }
+
+  .occupancy-meta {
+    justify-items: start;
   }
 }

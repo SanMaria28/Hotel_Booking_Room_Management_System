@@ -30,8 +30,16 @@ export class HotelService {
     return this.http.get<Room[]>(this.roomsUrl);
   }
 
+  createHotel(hotel: Omit<Hotel, 'id'>): Observable<Hotel> {
+    return this.http.post<Hotel>(this.hotelsUrl, hotel);
+  }
+
   createRoom(room: Omit<Room, 'id'>): Observable<Room> {
     return this.http.post<Room>(this.roomsUrl, room);
+  }
+
+  updateRoomAvailability(roomId: number, isAvailable: boolean): Observable<Room> {
+    return this.http.patch<Room>(`${this.roomsUrl}/${roomId}`, { isAvailable });
   }
 
   filterHotels(

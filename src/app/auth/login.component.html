@@ -1,15 +1,25 @@
 <section class="auth-page">
-  <div class="auth-panel intro-panel">
-    <p class="eyebrow">Premium hospitality platform</p>
-    <h1>Sign in to manage bookings, guests, and curated room inventory.</h1>
+  <div class="auth-panel intro-panel" [class.admin-intro-panel]="isAdminLogin">
+    <p class="eyebrow">{{ isAdminLogin ? 'Administrator access' : 'Guest access' }}</p>
+    <h1>
+      {{ isAdminLogin
+        ? 'Sign in to manage hotels, guest bookings, and room inventory.'
+        : 'Sign in to explore luxury hotels, reserve rooms, and manage your trips.' }}
+    </h1>
     <p class="support-copy">
-      Use the demo accounts below:
-      <strong>admin / admin123</strong> or <strong>maya / guest123</strong>.
+      <ng-container *ngIf="isAdminLogin; else guestHint">
+        Use the admin credentials:
+        <strong>admin / admin123</strong>.
+      </ng-container>
+      <ng-template #guestHint>
+        Use a guest account to book hotels:
+        <strong>maya / guest123</strong> or create a new guest account.
+      </ng-template>
     </p>
   </div>
 
   <div class="auth-panel form-panel">
-    <h2>Welcome back</h2>
+    <h2>{{ isAdminLogin ? 'Admin login' : 'Guest login' }}</h2>
 
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
       <mat-form-field appearance="outline" class="full-width">
@@ -38,6 +48,8 @@
     </form>
 
     <p class="error-msg" *ngIf="error">{{ error }}</p>
-    <p class="switch-copy">Need an account? <a routerLink="/signup">Create one</a></p>
+    <p class="switch-copy" *ngIf="isAdminLogin">Need hotel booking access? <a routerLink="/guest-login">Go to guest login</a></p>
+    <p class="switch-copy" *ngIf="!isAdminLogin">Need admin access? <a routerLink="/admin-login">Go to admin login</a></p>
+    <p class="switch-copy" *ngIf="!isAdminLogin">Need an account? <a routerLink="/signup">Create one</a></p>
   </div>
 </section>

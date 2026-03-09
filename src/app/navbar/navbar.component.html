@@ -9,17 +9,22 @@
 
   <nav class="nav-links">
     <a mat-button routerLink="/hotels" routerLinkActive="active-link">Hotels</a>
-    <a mat-button routerLink="/dashboard" routerLinkActive="active-link" *ngIf="userService.isLoggedIn()">Dashboard</a>
-    <a mat-button routerLink="/admin" routerLinkActive="active-link" *ngIf="userService.isAdmin()">Admin</a>
+    <a mat-button routerLink="/dashboard" routerLinkActive="active-link" *ngIf="userService.isGuest()">Dashboard</a>
+    <a mat-button routerLink="/admin" routerLinkActive="active-link" *ngIf="userService.isAdmin()">Admin Panel</a>
   </nav>
 
   <div class="toolbar-actions">
     <div class="session-chip" *ngIf="userService.currentUser as user">
       <mat-icon>account_circle</mat-icon>
-      <span>{{ user.fullName }}</span>
+      <span>{{ user.fullName }} · {{ user.role | titlecase }}</span>
     </div>
 
-    <a mat-stroked-button routerLink="/login" *ngIf="!userService.isLoggedIn()">Login</a>
+    <button mat-icon-button type="button" class="theme-toggle" (click)="themeService.toggleTheme()" [attr.aria-label]="themeService.isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+      <mat-icon>{{ themeService.isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+    <a mat-stroked-button routerLink="/guest-login" *ngIf="!userService.isLoggedIn()">Guest Login</a>
+    <a mat-stroked-button routerLink="/admin-login" *ngIf="!userService.isLoggedIn()">Admin Login</a>
     <a mat-flat-button color="primary" routerLink="/signup" *ngIf="!userService.isLoggedIn()">Sign Up</a>
     <button mat-flat-button color="accent" (click)="logout()" *ngIf="userService.isLoggedIn()">Logout</button>
   </div>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 
-import { User } from '../models/user.model';
+import { User, UserRole } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,23 @@ export class UserService {
     return this.sessionSubject.value;
   }
 
-  login(username: string, password: string): Observable<User> {
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl);
+  }
+
+  login(username: string, password: string, requiredRole?: UserRole): Observable<User> {
     return this.http.get<User[]>(`${this.usersUrl}?username=${username}`).pipe(
       map((users) => {
         const user = users.find((candidate) => candidate.password === password);
         if (!user) {
           throw new Error('Invalid username or password');
+        }
+        if (requiredRole && user.role !== requiredRole) {
+          throw new Error(
+            requiredRole === 'admin'
+              ? 'This page is only for admin access. Use guest login for hotel booking.'
+              : 'This page is only for guest access. Use admin login to open the admin panel.'
+          );
         }
         return user;
       }),
@@ -58,6 +69,10 @@ export class UserService {
 
   isAdmin(): boolean {
     return this.currentUser?.role === 'admin';
+  }
+
+  isGuest(): boolean {
+    return this.currentUser?.role === 'guest';
   }
 
   private setSession(user: User): void {

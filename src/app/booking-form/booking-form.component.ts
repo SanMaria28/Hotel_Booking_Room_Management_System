@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap } from 'rxjs';
 
 import { Booking } from '../models/booking.model';
 import { Room } from '../models/room.model';
@@ -63,8 +64,9 @@ export class BookingFormComponent implements OnInit {
   }
 
   get totalAmount(): number {
-    const guests = this.bookingForm.get('guests')?.value ?? 1;
-    return guests * this.hotelPrice;
+    const checkIn = this.bookingForm.get('checkIn')?.value;
+    const checkOut = this.bookingForm.get('checkOut')?.value;
+    return this.calculateNights(checkIn, checkOut) * this.hotelPrice;
   }
 
   submit(): void {
@@ -101,7 +103,10 @@ export class BookingFormComponent implements OnInit {
           return;
         }
 
-        this.bookingService.createBooking(bookingDraft).subscribe({
+        this.bookingService
+          .createBooking(bookingDraft)
+          .pipe(switchMap(() => this.hotelService.updateRoomAvailability(value.roomId, false)))
+          .subscribe({
           next: () => {
             this.snackBar.open('Booking confirmed successfully.', 'Close', { duration: 3000 });
             this.router.navigate(['/dashboard']);
@@ -109,7 +114,7 @@ export class BookingFormComponent implements OnInit {
           error: (error) => {
             this.snackBar.open(`Booking failed: ${error.message}`, 'Close', { duration: 3000 });
           }
-        });
+          });
       });
   }
 
@@ -127,5 +132,14 @@ export class BookingFormComponent implements OnInit {
     }
 
     return null;
+  }
+
+  private calculateNights(checkIn?: string, checkOut?: string): number {
+    if (!checkIn || !checkOut) {
+      return 1;
+    }
+
+    const diff = new Date(checkOut).getTime() - new Date(checkIn).getTime();
+    return Math.max(1, Math.round(diff / (1000 * 60 * 60 * 24)));
   }
 }

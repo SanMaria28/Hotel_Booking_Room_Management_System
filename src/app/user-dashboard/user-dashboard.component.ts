@@ -37,9 +37,17 @@ export class UserDashboardComponent implements OnInit {
   }
 
   cancel(id: number): void {
+    const booking = this.bookings.find((item) => Number(item.id) === Number(id));
+    if (!booking) {
+      return;
+    }
+
     this.bookingService
       .cancelBooking(id)
-      .pipe(switchMap(() => this.bookingService.getUserBookings(this.userService.currentUser!.id)))
+      .pipe(
+        switchMap(() => this.hotelService.updateRoomAvailability(booking.roomId, true)),
+        switchMap(() => this.bookingService.getUserBookings(this.userService.currentUser!.id))
+      )
       .subscribe((bookings) => this.mapBookings(bookings));
   }
 

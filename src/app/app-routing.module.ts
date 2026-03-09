@@ -26,7 +26,9 @@ const routes: Routes = [
   { path: 'book/:id', component: BookingFormComponent, canActivate: [UserGuard] },
   { path: 'dashboard', component: UserDashboardComponent, canActivate: [UserGuard] },
   { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', redirectTo: 'guest-login', pathMatch: 'full' },
+  { path: 'guest-login', component: LoginComponent, data: { role: 'guest' } },
+  { path: 'admin-login', component: LoginComponent, data: { role: 'admin' } },
   { path: 'signup', component: SignupComponent },
   { path: '**', redirectTo: 'hotels' }
 ];

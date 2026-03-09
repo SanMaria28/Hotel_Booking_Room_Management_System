@@ -13,6 +13,6 @@ export class AdminGuard implements CanActivate {
     }
     return this.userService.isLoggedIn()
       ? this.router.createUrlTree(['/dashboard'])
-      : this.router.createUrlTree(['/login']);
+      : this.router.createUrlTree(['/admin-login']);
   }
 }

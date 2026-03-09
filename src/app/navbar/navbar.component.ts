@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -12,11 +13,12 @@ import { UserService } from '../services/user.service';
 export class NavbarComponent {
   constructor(
     public readonly userService: UserService,
+    public readonly themeService: ThemeService,
     private readonly router: Router
   ) {}
 
   logout(): void {
     this.userService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/guest-login']);
   }
 }
